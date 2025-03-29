@@ -236,10 +236,13 @@ chrome.webRequest.onBeforeRequest.addListener(
                 } else {
                     domainList[tabId] = new Set()
                 }
+                domainList[tabId].add(address)
+                chrome.storage.session.set({ [tabSessionKey]: Array.from(domainList[tabId]) })
             })
+        } else {
+            domainList[tabId].add(address)
+            chrome.storage.session.set({ [tabSessionKey]: Array.from(domainList[tabId]) })
         }
-        domainList[tabId].add(address)
-        chrome.storage.session.set({ [tabSessionKey]: Array.from(domainList[tabId]) })
     },
     {
         urls: ['http://*/*', 'https://*/*'],
@@ -261,7 +264,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break
 
         case 'getDomainList':
-            sendResponse(Array.from(domainList[activeTabId]))
+            sendResponse(Array.from(domainList[activeTabId] || []))
             break
 
         case 'delDomainProxy':
