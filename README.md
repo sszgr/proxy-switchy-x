@@ -13,11 +13,8 @@ This Chrome extension allows users to quickly configure domain-specific proxy se
 - User-friendly Chrome extension integration.
 
 ## Installation
-1. Clone this repository or download the source files.
-2. Open Chrome and navigate to `chrome://extensions/`.
-3. Enable "Developer mode" in the top right corner.
-4. Click on "Load unpacked" and select the project folder.
-5. The extension is now installed and ready to use.
+1. Download and install the extension from the Chrome Web Store (link here).
+2. After installation, the extension icon will appear in the Chrome toolbar.
 
 ## Usage
 1. Open the extension popup.

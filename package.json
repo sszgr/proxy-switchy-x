@@ -2,7 +2,7 @@
   "name": "proxy-switchy-x",
   "author": "sszgr <fsszgr@gmail.com>",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "build": "webpack --mode production --stats=minimal",

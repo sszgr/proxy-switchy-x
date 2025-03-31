@@ -149,13 +149,16 @@ const getDomainsText = (domains) => {
 
 const parseProxyDomainsText = (proxy) => {
     let domains = proxy.domainsText?.split('\n').map(line => {
+        if (line.trim() == "") {
+            return
+        }
         let parts = line.trim().split(' ');
         if (parts.length === 2) {
             return new DomainRule({ mode: parts[0], domain: parts[1], proxy: proxy.id });
         } else {
             return new DomainRule({ domain: parts[0], proxy: proxy.id });
         }
-    });
+    }).filter(Boolean);
     return domains
 }
 

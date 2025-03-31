@@ -54,6 +54,13 @@ class DomainRule {
             return this.domain == domain
         }
 
+        if (this.domain == '' || domain == '') {
+            return false
+        }
+
+        if (this.domain == domain){
+            return true
+        }
         return picomatch.isMatch(domain, this.domain, { noglobstar: true });
     }
 
