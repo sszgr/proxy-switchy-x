@@ -32,7 +32,6 @@
         "webRequest",
         "activeTab",
         "storage",
-        "tabs",
         "proxy"
     ],
     "version": "1.0.1"
