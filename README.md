@@ -1,7 +1,7 @@
 # Chrome Proxy Manager
 
 ## Overview
-This Chrome extension allows users to quickly configure domain-specific proxy settings. It enables users to assign different proxies to specific domains and manage their proxy configurations efficiently.
+This Chrome extension allows users to quickly configure domain-specific proxy settings. It enables users to assign different proxies to specific domains and manage their proxy configurations efficiently. Completely ad-free, with data stored locally and no external links.
 
 ## Features
 - Assign different proxies to specific domains.
@@ -13,7 +13,7 @@ This Chrome extension allows users to quickly configure domain-specific proxy se
 - User-friendly Chrome extension integration.
 
 ## Installation
-1. Download and install the extension from the Chrome Web Store (link here).
+1. Download and install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/jbcknednlbbmkmcdolapkfoaecmkjmbl).
 2. After installation, the extension icon will appear in the Chrome toolbar.
 
 ## Usage

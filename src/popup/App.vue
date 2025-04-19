@@ -1,19 +1,18 @@
 <template>
     <div class="main">
-        <el-text>
-            Click domain to choose proxy for that specific domain or visit
-            <a href="./options.html" class="link" target="_blank">Options</a> to configure proxy rules for all domains.
+        <el-text v-html="$t('popupHeaderDesc')">
         </el-text>
         <el-divider />
         <div>
-            <el-select v-model="defaultProxy" clearable @change="setFilterDomainProxy">
-                <template #prefix>Switch all filter domains to</template>
+            <el-select v-model="defaultProxy" clearable @change="setFilterDomainProxy"
+                :placeholder="$t('popupFilterSelect')">
+                <template #prefix>{{ $t('popupSwitchAllFilterDomains') }}</template>
                 <el-option v-for="proxy in preferences.proxies" :key="proxy.id" :value="proxy.id" :label="proxy.name" />
             </el-select>
         </div>
         <br />
         <div>
-            <el-input v-model="domainFilter" placeholder="Filter domains" />
+            <el-input v-model="domainFilter" :placeholder="$t('popupFilterdomains')" />
         </div>
         <br />
         <ul>
@@ -27,7 +26,7 @@
                 </el-select>
             </li>
         </ul>
-        <el-text v-show="filteredDomains().length === 0">No requests captured.</el-text>
+        <el-text v-show="filteredDomains().length === 0">{{ $t('popupNoRequestsCaptured') }}</el-text>
     </div>
 
 </template>

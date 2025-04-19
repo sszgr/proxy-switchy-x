@@ -1,0 +1,65 @@
+{
+    "extensionName": {
+		"message": "Proxy Switchy X"
+	},
+	"extensionDescription": {
+		"message": "快速为当前页面的每个请求设置代理"
+	},
+	"popupHeaderDesc": {
+		"message": "点击域名选择对应的代理，或前往 <a href='./options.html' class='link' target='_blank'>配置页</a> 设置所有域名的代理规则。"
+	},
+	"popupSwitchAllFilterDomains": {
+		"message": "将当前筛选的域名切换至指定代理"
+	},
+	"popupFilterdomains": {
+		"message": "筛选域名"
+	},
+	"popupFilterSelect": {
+		"message": "选择"
+	},
+	"popupNoRequestsCaptured": {
+		"message": "未捕获到任何请求。"
+	},
+	"optionsDefault":{
+		"message": "默认"
+	},
+	"optionsProxyName":{
+		"message": "名称"
+	},
+	"optionsProxyProtocol":{
+		"message": "协议"
+	},
+	"optionsProxyType":{
+		"message": "类型"
+	},
+	"optionsProxyPort":{
+		"message": "端口"
+	},
+	"optionsProxyHostname":{
+		"message": "主机名"
+	},
+	"optionsProxyUsername":{
+		"message": "用户名"
+	},
+	"optionsProxyPassword":{
+		"message": "密码"
+	},
+	"optionsDomainsViewOrUpdate":{
+		"message": "查看/更新域"
+	},
+	"optionsOperations":{
+		"message": "操作"
+	},
+	"optionsSaveBtn":{
+		"message": "保存"
+	},
+	"optionsProxyListTitle":{
+		"message": "# 代理列表"
+	},
+	"optionsSystemConfigTitle":{
+		"message": "# 系统配置"
+	},
+	"optionsSystemLanguageLabel":{
+		"message": "语言"
+	}
+}

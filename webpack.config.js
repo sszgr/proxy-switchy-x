@@ -61,11 +61,11 @@ export default {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new CleanWebpackPlugin({ paths: ['./release/'] }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'assets', to: 'assets' },
-        { from: 'manifest.json', to: 'manifest.json' }
+        { from: 'manifest.json', to: 'manifest.json' },
+        { from: '_locales', to: '_locales' }
       ]
     }),
     new HtmlWebpackPlugin({

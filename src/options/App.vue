@@ -1,126 +1,152 @@
 <template>
     <div class="container">
-        <el-form v-for="(proxy, index) in preferences.proxies" :key="proxy.id" label-width="auto">
-            <el-row class="item-title-box">
-                <el-col :span="20" @click="toggleCollapse(proxy)" class="item-title">
-                    <el-text>{{ proxy.name.toUpperCase() }}</el-text>
-                </el-col>
-                <el-col :span="4" class="item-title-actions">
-                    <el-checkbox label="Default" :model-value="proxy.id == preferences.defaultProxy"
-                        @change="setDefaultProxy(proxy.id)" />
-                    <el-icon @click="delProxyConfig(proxy)">
-                        <DeleteIcon />
-                    </el-icon>
-                </el-col>
-            </el-row>
-            <div class="item-content-box" v-show="proxy.isCollapsed">
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="Name">
-                            <el-input v-model="proxy.name" :disabled="proxy.builtIn" />
+        <el-collapse v-model="activeNames">
+            <el-collapse-item name="1">
+                <template #title>
+                    <span style="font-weight: bold;">{{ $t('optionsProxyListTitle') }}</span>
+                </template>
+                <el-form v-for="(proxy, index) in preferences.proxies" :key="proxy.id" label-width="auto">
+                    <el-row class="item-title-box">
+                        <el-col :span="20" @click="toggleCollapse(proxy)" class="item-title">
+                            <el-text>{{ proxy.name.toUpperCase() }}</el-text>
+                        </el-col>
+                        <el-col :span="4" class="item-title-actions">
+                            <el-checkbox :label="$t('optionsDefault')"
+                                :model-value="proxy.id == preferences.defaultProxy"
+                                @change="setDefaultProxy(proxy.id)" />
+                            <el-icon @click="delProxyConfig(proxy)">
+                                <DeleteIcon />
+                            </el-icon>
+                        </el-col>
+                    </el-row>
+                    <div class="item-content-box" v-show="proxy.isCollapsed">
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item :label="$t('optionsProxyName')">
+                                    <el-input v-model="proxy.name" :disabled="proxy.builtIn" />
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item :label="$t('optionsProxyType')">
+                                    <el-select v-model="proxy.type" :disabled="proxy.builtIn"
+                                        @change="(value) => changeProxyType(proxy, value)">
+                                        <el-option v-for="item in typeOptions" :key="item.value" :label="item.label"
+                                            :value="item.value" />
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <template v-if="['http', 'https', 'socks4', 'socks5'].includes(proxy.type)">
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item :label="$t('optionsProxyHostname')">
+                                        <el-input v-model="proxy.proxyServer.hostname" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item :label="$t('optionsProxyPort')">
+                                        <el-input-number v-model="proxy.proxyServer.port" />
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item :label="$t('optionsProxyUsername')">
+                                        <el-input v-model="proxy.proxyServer.username" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item :label="$t('optionsProxyPassword')">
+                                        <el-input type="password" show-password v-model="proxy.proxyServer.password" />
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </template>
+                        <template v-if="proxy.type == 'group'">
+                            <el-table :data="proxy.groups" border>
+                                <el-table-column align="center" prop="protocol" :label="$t('optionsProxyProtocol')"
+                                    width="180">
+                                    <template #default="scope">
+                                        <el-select v-model="scope.row.protocol" placeholder="Select">
+                                            <el-option v-for="item in proxyProtocolOptions" :key="item.value"
+                                                :label="item.label" :value="item.value" />
+                                        </el-select>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column align="center" prop="hostname" :label="$t('optionsProxyHostname')">
+                                    <template #default="scope">
+                                        <el-input v-model="scope.row.hostname" />
+                                    </template>
+                                </el-table-column>
+                                <el-table-column align="center" prop="port" :label="$t('optionsProxyPort')">
+                                    <template #default="scope">
+                                        <el-input-number v-model="scope.row.port" />
+                                    </template>
+                                </el-table-column>
+                                <el-table-column align="center" prop="username" :label="$t('optionsProxyUsername')">
+                                    <template #default="scope">
+                                        <el-input v-model="scope.row.username" />
+                                    </template>
+                                </el-table-column>
+                                <el-table-column align="center" prop="password" :label="$t('optionsProxyPassword')">
+                                    <template #default="scope">
+                                        <el-input v-model="scope.row.password" />
+                                    </template>
+                                </el-table-column>
+                                <el-table-column header-align="center" :label="$t('optionsOperations')">
+                                    <template #default="scope">
+                                        <el-button size="small" style="width: 39%;"
+                                            @click="insertGroup(proxy, scope.$index)">+</el-button>
+                                        <el-button size="small" style="width: 39%;" v-if="scope.$index > 0"
+                                            @click="removeGroup(proxy, scope.$index)">-</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </template>
+                        <template v-if="proxy.type == 'pool'">
+                            <el-row>
+                                <el-input v-model="proxy.poolsText" type="textarea"
+                                    placeholder="socks5 hostname port [username] [password]" :rows="10" />
+                            </el-row>
+                        </template>
+                        <el-row>
+                            <el-text>
+                                {{ $t('optionsDomainsViewOrUpdate') }}
+                            </el-text>
+                            <el-input v-model="proxy.domainsText" type="textarea" placeholder="shell expression."
+                                :rows="10" />
+                        </el-row>
+                        <el-form-item>
+                            <el-col class="item-save">
+                                <el-button type="primary" @click="saveProxyConfig(proxy)">{{ $t('optionsSaveBtn')
+                                    }}</el-button>
+                            </el-col>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="Type">
-                            <el-select v-model="proxy.type" placeholder="Select" :disabled="proxy.builtIn"
-                                @change="(value) => changeProxyType(proxy, value)">
-                                <el-option v-for="item in typeOptions" :key="item.value" :label="item.label"
-                                    :value="item.value" />
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <template v-if="['http', 'https', 'socks4', 'socks5'].includes(proxy.type)">
-                    <el-row>
-                        <el-col :span="12">
-                            <el-form-item label="Hostname">
-                                <el-input v-model="proxy.proxyServer.hostname" />
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label="Port">
-                                <el-input-number v-model="proxy.proxyServer.port" />
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="12">
-                            <el-form-item label="Username">
-                                <el-input v-model="proxy.proxyServer.username" />
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label="Password">
-                                <el-input type="password" show-password v-model="proxy.proxyServer.password" />
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
+                    </div>
+                </el-form>
+            </el-collapse-item>
+            <el-collapse-item name="2">
+                <template #title>
+                    <span style="font-weight: bold;">{{ $t('optionsSystemConfigTitle') }}</span>
                 </template>
-                <template v-if="proxy.type == 'group'">
-                    <el-table :data="proxy.groups" border>
-                        <el-table-column align="center" prop="protocol" label="Protocol" width="180">
-                            <template #default="scope">
-                                <el-select v-model="scope.row.protocol" placeholder="Select">
-                                    <el-option v-for="item in proxyProtocolOptions" :key="item.value"
-                                        :label="item.label" :value="item.value" />
-                                </el-select>
-                            </template>
-                        </el-table-column>
-                        <el-table-column align="center" prop="hostname" label="Hostname">
-                            <template #default="scope">
-                                <el-input v-model="scope.row.hostname" />
-                            </template>
-                        </el-table-column>
-                        <el-table-column align="center" prop="port" label="Port">
-                            <template #default="scope">
-                                <el-input-number v-model="scope.row.port" />
-                            </template>
-                        </el-table-column>
-                        <el-table-column align="center" prop="username" label="Username">
-                            <template #default="scope">
-                                <el-input v-model="scope.row.username" />
-                            </template>
-                        </el-table-column>
-                        <el-table-column align="center" prop="password" label="Password">
-                            <template #default="scope">
-                                <el-input v-model="scope.row.password" />
-                            </template>
-                        </el-table-column>
-                        <el-table-column header-align="center" label="Operations">
-                            <template #default="scope">
-                                <el-button size="small" style="width: 39%;"
-                                    @click="insertGroup(proxy, scope.$index)">+</el-button>
-                                <el-button size="small" style="width: 39%;" v-if="scope.$index > 0"
-                                    @click="removeGroup(proxy, scope.$index)">-</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </template>
-                <template v-if="proxy.type == 'pool'">
-                    <el-row>
-                        <el-input v-model="proxy.poolsText" type="textarea"
-                            placeholder="socks5 hostname port [username] [password]" :rows="10" />
-                    </el-row>
-                </template>
-                <el-row>
-                    <el-text>
-                        VIEW/UPDATE DOMAINS.
-                    </el-text>
-                    <el-input v-model="proxy.domainsText" type="textarea" placeholder="shell expression." :rows="10" />
-                </el-row>
-                <el-form-item>
-                    <el-col class="item-save">
-                        <el-button type="primary" @click="saveProxyConfig(proxy)">Save</el-button>
-                    </el-col>
-                </el-form-item>
-            </div>
-        </el-form>
+                <el-form label-width="auto">
+                    <el-form-item :label="$t('optionsSystemLanguageLabel')" style="width: 360px">
+                        <el-select v-model="language" @change="changeLanguage">
+                            <el-option label="中文" value="zh-CN" />
+                            <el-option label="English" value="en" />
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+            </el-collapse-item>
+        </el-collapse>
     </div>
 </template>
 <script setup>
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { DomainRule, ProxyServer, ProxyConfig } from '../common/proxy.js'
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n()
 
 const preferences = ref({})
 const typeOptions = [
@@ -138,6 +164,15 @@ const proxyProtocolOptions = [
     { label: 'SOCKS4', value: 'socks4' },
     { label: 'SOCKS5', value: 'socks5' },
 ]
+
+const language = ref('')
+const activeNames = ref(['1'])
+const changeLanguage = (lang) => {
+    locale.value = lang
+    chrome.storage.sync.set({
+        locale: lang,
+    })
+}
 
 const getDomainsText = (domains) => {
     let lines = []
@@ -197,7 +232,7 @@ const parseProxyPoolsText = (proxy) => {
 
 const getNewConfig = () => {
     const configId = 'p' + Date.now().toString(16)
-    const newConfig = new ProxyConfig({ id: configId, name: "NewConfig", type: "socks5" })
+    const newConfig = new ProxyConfig({ id: configId, name: 'NEWCONFIG', type: "socks5" })
     newConfig.proxyServer = new ProxyServer({ protocol: 'socks5' })
     return newConfig
 }
