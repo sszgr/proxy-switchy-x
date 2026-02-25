@@ -61,5 +61,8 @@
 	},
 	"optionsSystemLanguageLabel":{
 		"message": "Language"
+	},
+	"optionsSystemLanguagePlaceholder":{
+		"message": "Search or select language"
 	}
 }

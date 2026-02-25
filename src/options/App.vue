@@ -131,9 +131,21 @@
                 </template>
                 <el-form label-width="auto">
                     <el-form-item :label="$t('optionsSystemLanguageLabel')" style="width: 360px">
-                        <el-select v-model="language" @change="changeLanguage">
-                            <el-option label="中文" value="zh-CN" />
-                            <el-option label="English" value="en" />
+                        <el-select
+                            class="language-select"
+                            v-model="language"
+                            filterable
+                            default-first-option
+                            fit-input-width
+                            :placeholder="$t('optionsSystemLanguagePlaceholder')"
+                            @change="changeLanguage"
+                        >
+                            <el-option
+                                v-for="item in languageOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
                         </el-select>
                     </el-form-item>
                 </el-form>
@@ -164,13 +176,26 @@ const proxyProtocolOptions = [
     { label: 'SOCKS4', value: 'socks4' },
     { label: 'SOCKS5', value: 'socks5' },
 ]
+const languageOptions = [
+    { label: 'English', value: 'en' },
+    { label: '中文', value: 'zh' },
+    { label: '日本語', value: 'ja' },
+    { label: '한국어', value: 'ko' },
+    { label: 'Español', value: 'es' },
+    { label: 'Français', value: 'fr' },
+    { label: 'Deutsch', value: 'de' },
+    { label: 'Русский', value: 'ru' },
+    { label: 'Português (Brasil)', value: 'pt-BR' },
+]
 
-const language = ref('')
+const language = ref(locale.value || 'en')
 const activeNames = ref(['1'])
 const changeLanguage = (lang) => {
-    locale.value = lang
+    const nextLocale = lang || 'en'
+    locale.value = nextLocale
+    language.value = nextLocale
     chrome.storage.sync.set({
-        locale: lang,
+        locale: nextLocale,
     })
 }
 
@@ -219,10 +244,10 @@ const parseProxyPoolsText = (proxy) => {
             return
         }
         let nProxy = new ProxyServer({ protocol: parts[0], hostname: parts[1], port: parts[2] })
-        if (parts.length > 4) {
+        if (parts.length > 3) {
             nProxy.username = parts[3]
         }
-        if (parts.length > 5) {
+        if (parts.length > 4) {
             nProxy.password = parts[4]
         }
         return nProxy
@@ -398,5 +423,9 @@ getPreferences()
 
 .el-form {
     margin-bottom: 10px;
+}
+
+.language-select {
+    width: 100%;
 }
 </style>

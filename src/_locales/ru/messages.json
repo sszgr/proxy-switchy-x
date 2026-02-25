@@ -1,0 +1,68 @@
+{
+    "extensionName": {
+        "message": "Proxy Switchy X"
+    },
+    "extensionDescription": {
+        "message": "Быстрая настройка и персонализация параметров прокси для каждого домена или запроса."
+    },
+    "popupHeaderDesc": {
+        "message": "Нажмите на домен, чтобы выбрать прокси для него, или откройте <a href='./options.html' class='link' target='_blank'>Параметры</a>, чтобы настроить правила прокси для всех доменов."
+    },
+    "popupSwitchAllFilterDomains": {
+        "message": "Переключить все отфильтрованные домены на"
+    },
+    "popupFilterdomains": {
+        "message": "Фильтр доменов"
+    },
+    "popupFilterSelect": {
+        "message": "Выбрать"
+    },
+    "popupNoRequestsCaptured": {
+        "message": "Запросы не зафиксированы."
+    },
+    "optionsDefault": {
+        "message": "По умолчанию"
+    },
+    "optionsProxyName": {
+        "message": "Имя"
+    },
+    "optionsProxyProtocol": {
+        "message": "Протокол"
+    },
+    "optionsProxyType": {
+        "message": "Тип"
+    },
+    "optionsProxyPort": {
+        "message": "Порт"
+    },
+    "optionsProxyHostname": {
+        "message": "Хост"
+    },
+    "optionsProxyUsername": {
+        "message": "Имя пользователя"
+    },
+    "optionsProxyPassword": {
+        "message": "Пароль"
+    },
+    "optionsDomainsViewOrUpdate": {
+        "message": "ПРОСМОТР/ОБНОВЛЕНИЕ ДОМЕНОВ"
+    },
+    "optionsOperations": {
+        "message": "Операции"
+    },
+    "optionsSaveBtn": {
+        "message": "Сохранить"
+    },
+    "optionsProxyListTitle": {
+        "message": "# Настройки прокси"
+    },
+    "optionsSystemConfigTitle": {
+        "message": "# Системная конфигурация"
+    },
+    "optionsSystemLanguageLabel": {
+        "message": "Язык"
+    },
+    "optionsSystemLanguagePlaceholder": {
+        "message": "Найдите или выберите язык"
+    }
+}

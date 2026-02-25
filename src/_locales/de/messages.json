@@ -1,0 +1,68 @@
+{
+    "extensionName": {
+        "message": "Proxy Switchy X"
+    },
+    "extensionDescription": {
+        "message": "Proxy-Einstellungen für jede Domain oder Anfrage schnell konfigurieren oder anpassen."
+    },
+    "popupHeaderDesc": {
+        "message": "Klicke auf eine Domain, um den Proxy für diese Domain auszuwählen, oder öffne <a href='./options.html' class='link' target='_blank'>Optionen</a>, um Proxy-Regeln für alle Domains zu konfigurieren."
+    },
+    "popupSwitchAllFilterDomains": {
+        "message": "Alle gefilterten Domains umschalten auf"
+    },
+    "popupFilterdomains": {
+        "message": "Domains filtern"
+    },
+    "popupFilterSelect": {
+        "message": "Auswählen"
+    },
+    "popupNoRequestsCaptured": {
+        "message": "Keine Anfragen erfasst."
+    },
+    "optionsDefault": {
+        "message": "Standard"
+    },
+    "optionsProxyName": {
+        "message": "Name"
+    },
+    "optionsProxyProtocol": {
+        "message": "Protokoll"
+    },
+    "optionsProxyType": {
+        "message": "Typ"
+    },
+    "optionsProxyPort": {
+        "message": "Port"
+    },
+    "optionsProxyHostname": {
+        "message": "Hostname"
+    },
+    "optionsProxyUsername": {
+        "message": "Benutzername"
+    },
+    "optionsProxyPassword": {
+        "message": "Passwort"
+    },
+    "optionsDomainsViewOrUpdate": {
+        "message": "DOMAINS ANZEIGEN/AKTUALISIEREN"
+    },
+    "optionsOperations": {
+        "message": "Aktionen"
+    },
+    "optionsSaveBtn": {
+        "message": "Speichern"
+    },
+    "optionsProxyListTitle": {
+        "message": "# Proxy-Einstellungen"
+    },
+    "optionsSystemConfigTitle": {
+        "message": "# Systemkonfiguration"
+    },
+    "optionsSystemLanguageLabel": {
+        "message": "Sprache"
+    },
+    "optionsSystemLanguagePlaceholder": {
+        "message": "Sprache suchen oder auswählen"
+    }
+}

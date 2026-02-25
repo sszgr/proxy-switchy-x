@@ -61,5 +61,8 @@
 	},
 	"optionsSystemLanguageLabel":{
 		"message": "语言"
+	},
+	"optionsSystemLanguagePlaceholder":{
+		"message": "搜索或选择语言"
 	}
 }

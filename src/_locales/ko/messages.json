@@ -1,0 +1,68 @@
+{
+    "extensionName": {
+        "message": "Proxy Switchy X"
+    },
+    "extensionDescription": {
+        "message": "도메인 또는 요청별로 프록시 설정을 빠르게 구성하거나 사용자 지정합니다."
+    },
+    "popupHeaderDesc": {
+        "message": "도메인을 클릭해 해당 도메인의 프록시를 선택하거나 <a href='./options.html' class='link' target='_blank'>옵션</a>에서 모든 도메인의 프록시 규칙을 설정하세요."
+    },
+    "popupSwitchAllFilterDomains": {
+        "message": "필터된 모든 도메인을 다음으로 전환"
+    },
+    "popupFilterdomains": {
+        "message": "도메인 필터"
+    },
+    "popupFilterSelect": {
+        "message": "선택"
+    },
+    "popupNoRequestsCaptured": {
+        "message": "캡처된 요청이 없습니다."
+    },
+    "optionsDefault": {
+        "message": "기본값"
+    },
+    "optionsProxyName": {
+        "message": "이름"
+    },
+    "optionsProxyProtocol": {
+        "message": "프로토콜"
+    },
+    "optionsProxyType": {
+        "message": "유형"
+    },
+    "optionsProxyPort": {
+        "message": "포트"
+    },
+    "optionsProxyHostname": {
+        "message": "호스트명"
+    },
+    "optionsProxyUsername": {
+        "message": "사용자 이름"
+    },
+    "optionsProxyPassword": {
+        "message": "비밀번호"
+    },
+    "optionsDomainsViewOrUpdate": {
+        "message": "도메인 보기/업데이트"
+    },
+    "optionsOperations": {
+        "message": "작업"
+    },
+    "optionsSaveBtn": {
+        "message": "저장"
+    },
+    "optionsProxyListTitle": {
+        "message": "# 프록시 설정"
+    },
+    "optionsSystemConfigTitle": {
+        "message": "# 시스템 설정"
+    },
+    "optionsSystemLanguageLabel": {
+        "message": "언어"
+    },
+    "optionsSystemLanguagePlaceholder": {
+        "message": "언어 검색 또는 선택"
+    }
+}
